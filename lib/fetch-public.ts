@@ -3,6 +3,11 @@ export interface FetchedPage {
   label: string;
   text: string;
   ok: boolean;
+  title?: string;
+  description?: string;
+  publishedAt?: string | null;
+  signalType?: "jobs" | "procurement" | "registry" | "other" | null;
+  discoveredLinks?: { url: string; signalType: NonNullable<FetchedPage["signalType"]> }[];
   error?: string;
 }
 
@@ -15,6 +20,8 @@ export interface PublicFetchResult {
 const FETCH_TIMEOUT_MS = 12_000;
 const MAX_CHARS_PER_PAGE = 8_000;
 const MAX_COMBINED = 24_000;
+const MAX_DISCOVERED_PAGES = 5;
+const MAX_ARTICLE_PAGES = 3;
 
 const PATHS: { path: string; label: string }[] = [
   { path: "/", label: "homepage" },
@@ -47,6 +54,97 @@ function stripHtml(html: string): string {
     .trim();
 }
 
+function decodeHtml(value: string): string {
+  return value
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&nbsp;/gi, " ")
+    .trim();
+}
+
+function parsePublishedAt(html: string): string | null {
+  const datePatterns = [
+    /<meta\b[^>]*(?:property|name)=["'](?:article:published_time|datepublished|pubdate)["'][^>]*content=["']([^"']+)["'][^>]*>/i,
+    /<meta\b[^>]*content=["']([^"']+)["'][^>]*(?:property|name)=["'](?:article:published_time|datepublished|pubdate)["'][^>]*>/i,
+    /<time\b[^>]*datetime=["']([^"']+)["'][^>]*>/i,
+    /["']datePublished["']\s*:\s*["']([^"']+)["']/i,
+  ];
+
+  for (const pattern of datePatterns) {
+    const match = html.match(pattern);
+    if (!match?.[1]) continue;
+    const timestamp = Date.parse(match[1]);
+    if (Number.isFinite(timestamp)) {
+      return new Date(timestamp).toISOString();
+    }
+  }
+  return null;
+}
+
+function extractTitle(html: string): string | undefined {
+  const title =
+    html.match(/<meta\b[^>]*property=["']og:title["'][^>]*content=["']([^"']+)["'][^>]*>/i)?.[1] ??
+    html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1];
+  return title ? decodeHtml(stripHtml(title)).slice(0, 180) : undefined;
+}
+
+function extractDescription(html: string): string | undefined {
+  const metaTags = html.match(/<meta\b[^>]*>/gi) ?? [];
+  for (const tag of metaTags) {
+    const name =
+      tag.match(/\b(?:name|property)=["']([^"']+)["']/i)?.[1]?.toLowerCase();
+    if (name !== "description" && name !== "og:description") continue;
+    const content = tag.match(/\bcontent=["']([^"']+)["']/i)?.[1];
+    if (content) return decodeHtml(content).slice(0, 400);
+  }
+  return undefined;
+}
+
+function getSignalType(url: string, label = ""): FetchedPage["signalType"] {
+  const path = new URL(url).pathname;
+  const location = `${path} ${label}`;
+  if (/career|jobs?/i.test(location)) return "jobs";
+  if (/procure|tender|supplier/i.test(location)) return "procurement";
+  if (/registry|permit/i.test(location)) return "registry";
+  if (/news|press|media|announcement|blog|insight/i.test(location)) return "other";
+  return null;
+}
+
+function discoverSignalLinks(
+  html: string,
+  homepageUrl: string
+): NonNullable<FetchedPage["discoveredLinks"]> {
+  const origin = new URL(homepageUrl).origin;
+  const links = new Map<
+    string,
+    NonNullable<FetchedPage["signalType"]>
+  >();
+  const anchors = html.matchAll(/<a\b[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi);
+
+  for (const [, href, label] of anchors) {
+    try {
+      const url = new URL(decodeHtml(href), origin);
+      const linkLabel = stripHtml(label);
+      const signalType = getSignalType(url.toString(), linkLabel);
+      if (url.origin !== origin || !signalType) {
+        continue;
+      }
+      url.hash = "";
+      url.search = "";
+      if (url.pathname !== "/") links.set(url.toString(), signalType);
+    } catch {
+      continue;
+    }
+  }
+  return [...links].slice(0, MAX_DISCOVERED_PAGES).map(([url, signalType]) => ({
+    url,
+    signalType,
+  }));
+}
+
 /** Browser-like headers — many CDNs (Akamai, etc.) 403 custom bot UAs. */
 const BROWSER_HEADERS: HeadersInit = {
   "User-Agent":
@@ -59,7 +157,11 @@ const BROWSER_HEADERS: HeadersInit = {
   "Upgrade-Insecure-Requests": "1",
 };
 
-async function fetchOne(url: string, label: string): Promise<FetchedPage> {
+async function fetchOne(
+  url: string,
+  label: string,
+  signalType?: NonNullable<FetchedPage["signalType"]>
+): Promise<FetchedPage> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   try {
@@ -88,7 +190,17 @@ async function fetchOne(url: string, label: string): Promise<FetchedPage> {
         error: `Too little public text on ${label}`,
       };
     }
-    return { url, label, text, ok: true };
+    return {
+      url,
+      label,
+      text,
+      ok: true,
+      title: extractTitle(html),
+      description: extractDescription(html),
+      publishedAt: parsePublishedAt(html),
+      signalType: signalType ?? getSignalType(url),
+      discoveredLinks: discoverSignalLinks(html, url),
+    };
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return {
@@ -124,7 +236,38 @@ export async function fetchPublicCompanyPages(
       fetchOne(`${origin}${path}`, label)
     )
   );
-  const pages = [home, ...rest];
+  const initialPages = [home, ...rest];
+  const knownUrls = new Set(initialPages.map((page) => page.url));
+  const discoveredLinks = new Map(
+    initialPages.flatMap((page) => page.discoveredLinks ?? []).map((link) => [
+      link.url,
+      link.signalType,
+    ])
+  );
+  const discoveredUrls = [...discoveredLinks].filter(([url]) => !knownUrls.has(url));
+  const discoveredPages = await Promise.all(
+    discoveredUrls.map(([url, signalType]) => {
+      const path = new URL(url).pathname;
+      return fetchOne(url, path, signalType);
+    })
+  );
+  const knownAfterDiscovery = new Set([
+    ...knownUrls,
+    ...discoveredUrls.map(([url]) => url),
+  ]);
+  const articleLinks = new Map(
+    discoveredPages
+      .filter((page) => page.ok && page.signalType === "other")
+      .flatMap((page) => page.discoveredLinks ?? [])
+      .filter((link) => !knownAfterDiscovery.has(link.url))
+      .map((link) => [link.url, link.signalType])
+  );
+  const articlePages = await Promise.all(
+    [...articleLinks]
+      .slice(0, MAX_ARTICLE_PAGES)
+      .map(([url, signalType]) => fetchOne(url, new URL(url).pathname, signalType))
+  );
+  const pages = [...initialPages, ...discoveredPages, ...articlePages];
 
   const gaps: string[] = [];
   const okPages = pages.filter((p) => p.ok);
@@ -159,7 +302,7 @@ export async function fetchPublicCompanyPages(
   }
 
   return {
-    pages,
+    pages: pages.map(({ discoveredLinks: _discoveredLinks, ...page }) => page),
     combinedText: chunks.join("\n\n"),
     gaps,
   };

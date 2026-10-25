@@ -49,6 +49,13 @@ Spec: [`specs/005-guided-demo-desk/`](specs/005-guided-demo-desk/) (earlier: `00
 - `POST /api/opportunities/investigate` — `{ "input": "kone.com" }`
 - `POST /api/proofs/run` — document consolidation proof
 
+Live company checks read the company website and follow a small number of
+same-site links to jobs, news, procurement, permit, and registry pages, plus
+linked news stories when available. A signal is marked recent only when its
+page provides a publication date from the last 12 months. Undated pages are
+shown as undated. This does not search external registries, job boards, or
+tender databases, so it may miss public signals hosted elsewhere.
+
 ## Ground rules
 
 - Public evidence only; fact ≠ hypothesis

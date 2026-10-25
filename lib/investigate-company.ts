@@ -64,14 +64,14 @@ export async function investigateCompany(
   gaps.push(...fetched.gaps);
 
   const signals: Signal[] = fetched.pages
-    .filter((p) => p.ok)
+    .filter((p) => p.ok && p.signalType)
     .map((p, i) => ({
       id: `live-sig-${i + 1}`,
-      sourceType: "website" as const,
-      sourceLabel: p.label,
+      sourceType: p.signalType ?? "other",
+      sourceLabel: p.title || p.label,
       sourceUrl: p.url,
-      publishedAt: null,
-      summary: p.text.slice(0, 220),
+      publishedAt: p.publishedAt || null,
+      summary: p.description || p.text.slice(0, 220),
     }));
 
   let llm: LlmOut | null = null;

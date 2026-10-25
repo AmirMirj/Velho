@@ -19,8 +19,16 @@ export function InvestigationPanel({ data }: Props) {
 
   const facts = data.evidence.filter((e: EvidenceItem) => e.kind === "fact");
   const hyps = data.evidence.filter((e: EvidenceItem) => e.kind === "hypothesis");
+  const signals = data.signals;
   const gaps = "gaps" in data ? data.gaps || [] : [];
   const warnings = "warnings" in data ? data.warnings || [] : [];
+  const now = Date.now();
+  const recentSignals = signals.filter((signal) => {
+    if (!signal.publishedAt) return false;
+    const publishedAt = Date.parse(signal.publishedAt);
+    const age = now - publishedAt;
+    return Number.isFinite(publishedAt) && age >= 0 && age <= 365 * 24 * 60 * 60 * 1000;
+  });
   const clueStrength = {
     high: "strong",
     medium: "mixed",
@@ -41,6 +49,65 @@ export function InvestigationPanel({ data }: Props) {
       <p className="hint">
         The score helps sort companies. It does not mean they want to buy.
       </p>
+
+      <h4>Public signals</h4>
+      <p className="hint">
+        These company pages may be worth checking. A page is not proof that a
+        problem exists.
+      </p>
+      {signals.length > 0 ? (
+        <>
+          <ul className="signal-list public-signals">
+            {signals.map((signal) => {
+              const publishedAt = signal.publishedAt
+                ? Date.parse(signal.publishedAt)
+                : Number.NaN;
+              const age = now - publishedAt;
+              const isRecent =
+                Number.isFinite(publishedAt) &&
+                age >= 0 &&
+                age <= 365 * 24 * 60 * 60 * 1000;
+              const dateLabel = Number.isFinite(publishedAt)
+                ? new Date(publishedAt).toLocaleDateString()
+                : "Date not shown";
+              const sourceTypeLabel = {
+                jobs: "Jobs",
+                procurement: "Tender or supplier notice",
+                registry: "Permit or registry",
+                other: "News or update",
+                website: "Company page",
+              }[signal.sourceType];
+              return (
+                <li key={signal.id}>
+                  <span className={`signal-date${isRecent ? " recent" : ""}`}>
+                    {isRecent ? "Recent · " : ""}
+                    {dateLabel}
+                  </span>
+                  <span className="signal-kind">{sourceTypeLabel}</span>
+                  <strong>{signal.sourceLabel}</strong>
+                  <p>{signal.summary}</p>
+                  {signal.sourceUrl && (
+                    <a href={signal.sourceUrl} target="_blank" rel="noreferrer">
+                      Open source
+                    </a>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+          {recentSignals.length === 0 && (
+            <p className="hint">
+              No dated signal from the last 12 months was found. Check the
+              linked pages for updates.
+            </p>
+          )}
+        </>
+      ) : (
+        <p className="hint">
+          No job, news, permit, or tender pages were found. Try the company
+          website directly and check its public updates.
+        </p>
+      )}
 
       <h4>What we know</h4>
       <ul className="signal-list">

@@ -576,6 +576,35 @@ details > .workflow-step-heading {
   color: var(--ink-soft);
 }
 
+.public-signals li {
+  margin-bottom: 0.85rem;
+}
+
+.public-signals li > p {
+  margin: 0.25rem 0;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.signal-date {
+  display: inline-block;
+  margin-right: 0.45rem;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+}
+
+.signal-date.recent {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.signal-kind {
+  display: inline-block;
+  margin-right: 0.45rem;
+  color: var(--ink-faint);
+  font-size: 0.78rem;
+}
+
 .opp-detail h3 {
   margin: 0 0 0.35rem;
 }
