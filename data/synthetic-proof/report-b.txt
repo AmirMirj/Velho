@@ -1,0 +1,8 @@
+Quarterly Operations Summary — Sample Unit B
+Period: Q1
+Metric,Value,Unit
+Manual report hours,38,hours/week
+Systems reconciled,6,count
+Exception tickets,97,count
+On-time KPI pack,0.76,ratio
+Notes: Similar consolidation steps as Unit A; formatting differs by region.

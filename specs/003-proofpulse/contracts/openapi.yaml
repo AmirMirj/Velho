@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: ProofPulse API
+  version: 0.3.0
+  description: >
+    Session-consumed ProofPulse endpoints. Seed feed + on-demand investigate +
+    document consolidation proof. No send/contact. No persistence.
+servers:
+  - url: http://localhost:3002
+paths:
+  /api/opportunities:
+    get:
+      operationId: listOpportunityFeed
+      summary: Return seed opportunity feed
+      responses:
+        '200':
+          description: Feed entries
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [entries]
+                properties:
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FeedEntry'
+  /api/opportunities/investigate:
+    post:
+      operationId: investigateCompany
+      summary: On-demand public investigation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [input]
+              properties:
+                input:
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+      responses:
+        '200':
+          description: Investigation pack
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvestigationResult'
+        '400':
+          description: Invalid input
+        '502':
+          description: Upstream failure with partial payload
+  /api/proofs/run:
+    post:
+      operationId: runDocumentProof
+      summary: Run document consolidation One-Hour Proof
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                companyName:
+                  type: string
+                publicDocTexts:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name: { type: string }
+                      text: { type: string }
+                forceSynthetic:
+                  type: boolean
+      responses:
+        '200':
+          description: Proof result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Demonstration'
+components:
+  schemas:
+    FeedEntry:
+      type: object
+      required: [opportunityId, companyName, hypothesis, score, confidence, recommendedAction, signals]
+      properties:
+        opportunityId: { type: string }
+        companyId: { type: string }
+        companyName: { type: string }
+        domain: { type: ['string', 'null'] }
+        industryHint: { type: ['string', 'null'] }
+        hypothesis: { type: string }
+        score: { type: number }
+        confidence: { type: string, enum: [high, medium, low] }
+        evidenceStrength: { type: string, enum: [strong, moderate, weak] }
+        estimatedAnnualValueEur: { type: ['number', 'null'] }
+        recommendedAction: { type: string, enum: [pursue, investigate, reject] }
+        signals:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string }
+              sourceType: { type: string }
+              summary: { type: string }
+              sourceUrl: { type: ['string', 'null'] }
+    InvestigationResult:
+      type: object
+      required: [company, signals, evidence, opportunity, gaps, warnings]
+      properties:
+        company: { type: object }
+        signals: { type: array }
+        evidence: { type: array }
+        opportunity: { type: object }
+        gaps: { type: array, items: { type: string } }
+        warnings: { type: array, items: { type: string } }
+    Demonstration:
+      type: object
+      required: [id, type, inputSource, inputs, output, limitations, status]
+      properties:
+        id: { type: string }
+        type: { type: string, enum: [document-consolidation] }
+        inputSource: { type: string, enum: [company-public, synthetic-fallback] }
+        inputs: { type: array }
+        output: { type: object }
+        limitations: { type: array, items: { type: string } }
+        status: { type: string }

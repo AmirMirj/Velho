@@ -1,0 +1,841 @@
+/* Layout-only styles for /demo. Colours, fonts and background come from app/globals.css. */
+
+.demo .demo-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+.demo .demo-head h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+.demo .notice {
+  font-size: 0.82rem;
+  color: var(--warn);
+  margin: 0 0 1rem;
+}
+
+/* Presenter guide */
+.demo .guide {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.1rem;
+}
+.demo .guide summary {
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.demo .guide ol {
+  margin: 0.5rem 0 0.3rem;
+  padding-left: 1.2rem;
+  line-height: 1.6;
+}
+.demo .guide p {
+  margin: 0;
+}
+
+/* Timeline */
+.tl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.tl-step {
+  position: relative;
+  padding: 0 0 0.9rem 2.6rem;
+}
+.tl-step::before {
+  content: "";
+  position: absolute;
+  left: 0.9rem;
+  top: 1.9rem;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+.tl-step:last-child::before {
+  display: none;
+}
+.tl-step.done::before {
+  background: var(--accent);
+}
+.tl-node {
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 2px solid var(--line);
+  background: var(--paper);
+  color: var(--ink-soft);
+}
+.tl-step.done .tl-node {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+.tl-step.current .tl-node {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+.tl-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 2rem;
+  padding: 0.25rem 0;
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+button.tl-head {
+  cursor: pointer;
+}
+button.tl-head:hover .tl-title {
+  color: var(--accent-ink);
+}
+.tl-title {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.tl-summary {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.tl-step.locked .tl-title {
+  color: var(--ink-faint);
+}
+.tl-body {
+  margin-top: 0.4rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  box-shadow: var(--shadow);
+  animation: rise 0.35s ease both;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Shared bits inside steps */
+.demo .grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+.demo .grid.two {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.demo label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+.demo select,
+.demo input,
+.demo textarea {
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.5rem 0.65rem;
+  background: var(--surface);
+  min-height: 2.4rem;
+}
+.demo textarea {
+  resize: vertical;
+  line-height: 1.45;
+}
+.demo .actions {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.demo .actions > label {
+  flex: 1 1 240px;
+}
+.demo .btn {
+  min-height: 2.4rem;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--accent);
+  color: var(--on-accent);
+  transition: background 0.15s ease, transform 0.15s ease;
+  align-self: flex-end;
+}
+.demo .btn:hover {
+  background: var(--accent-ink);
+  transform: translateY(-1px);
+}
+.demo .btn.ghost {
+  background: transparent;
+  color: var(--accent-ink);
+  border: 1px solid var(--accent);
+}
+.demo .btn.ghost:hover {
+  background: var(--accent-bg);
+}
+.demo .chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  background: var(--paper-2);
+  color: var(--ink-soft);
+  margin-right: 0.35rem;
+  vertical-align: 1px;
+}
+.demo .chip.warn {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+.demo .chip.ok {
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+.demo .chip.conf-low {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+.demo .chip.conf-medium {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+.demo .chip.conf-high {
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+.demo .note {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+.demo .warn-text {
+  color: var(--warn);
+}
+
+/* Step 1 meter */
+.demo .meter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+}
+.demo .meter .bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--paper-2);
+  overflow: hidden;
+}
+.demo .meter .bar div {
+  height: 100%;
+  background: var(--accent);
+}
+.demo .meter strong {
+  font-family: var(--mono);
+}
+
+/* Step 2 */
+.demo .hyp {
+  margin: 0;
+  padding: 0.45rem 0.7rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface-2);
+  font-size: 0.92rem;
+}
+.demo .list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.88rem;
+}
+.demo .list-title {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  margin: 0 0 0.35rem;
+}
+.demo details.more summary {
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--accent-ink);
+}
+.demo details.more[open] summary {
+  margin-bottom: 0.4rem;
+}
+.demo details.more ol,
+.demo details.more ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+/* Step 3 KPIs */
+.demo .kpis {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.demo .kpi span {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+.demo .kpi strong {
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
+}
+.demo .kpi.main strong {
+  color: var(--accent-ink);
+}
+.demo .formula {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* Step 4 mini-timeline */
+.demo .flow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  counter-reset: flow;
+}
+.demo .flow li {
+  counter-increment: flow;
+  flex: 1 1 150px;
+  font-size: 0.82rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  position: relative;
+}
+.demo .flow li::before {
+  content: counter(flow);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent-ink);
+  margin-right: 0.35rem;
+}
+.demo .value {
+  margin: 0;
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+.demo .table-wrap {
+  overflow-x: auto;
+}
+.demo table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+.demo th,
+.demo td {
+  text-align: left;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--paper-2);
+  white-space: nowrap;
+}
+.demo th {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.demo tr.flagged td {
+  background: var(--warn-bg);
+}
+.demo pre {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--paper-2);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin: 0.3rem 0;
+  white-space: pre-wrap;
+}
+
+/* Step 5 */
+.demo .draft {
+  min-height: 12rem;
+}
+/* Guided Demo Desk (feature 005) — layout only; colours come from app/globals.css tokens. */
+.demo {
+  padding-bottom: 7rem;
+}
+.demo .chip.info {
+  background: var(--info-bg);
+  color: var(--info);
+}
+.demo .caution {
+  color: var(--warn);
+}
+
+/* Funnel strip */
+.funnel {
+  list-style: none;
+  margin: 0 0 1.2rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  gap: 0.4rem;
+  overflow-x: auto;
+}
+.fn button {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.fn button:hover:not(:disabled) {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.fn button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+.fn-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+}
+.fn.done .fn-label {
+  color: var(--ok);
+}
+.fn.current button {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+}
+.fn.current .fn-label {
+  color: var(--accent-ink);
+}
+.fn-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+.fn-sub {
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+/* Company cards + signal chips */
+.demo .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+.co-card {
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.co-card:hover {
+  border-color: var(--ink-faint);
+}
+.co-card.active {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+.co-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.co-name {
+  font-weight: 700;
+}
+.co-score {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 6px;
+  background: var(--paper-2);
+  color: var(--ink-soft);
+}
+.co-score.hot {
+  background: var(--accent-bg);
+  color: var(--accent-ink);
+}
+.co-score.warm {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+.co-meta {
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+}
+.demo .chips {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.sig-chip {
+  font: inherit;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  cursor: pointer;
+}
+.sig-chip.active {
+  color: var(--ink);
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+/* Priority breakdown */
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.bd-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+.bd-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-ink);
+  margin-right: 0.3rem;
+}
+.bd-score {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+.bd-of {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-right: 0.4rem;
+}
+.bd-bar {
+  display: flex;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+.bd-seg.evidence,
+.dot.evidence {
+  background: var(--accent);
+}
+.bd-seg.workload,
+.dot.workload {
+  background: var(--info);
+}
+.bd-seg.fit,
+.dot.fit {
+  background: var(--warn);
+}
+.bd-seg + .bd-seg {
+  border-left: 2px solid var(--paper);
+}
+.bd-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+.bd-legend strong {
+  color: var(--ink);
+  margin-left: 0.2rem;
+}
+.dot {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  margin-right: 0.35rem;
+}
+.muted-num {
+  color: var(--ink-faint);
+}
+
+/* Tour spotlight */
+.tl-step.spotlight .tl-body,
+.spotlight .recap {
+  box-shadow: 0 0 0 2px var(--accent), 0 0 30px rgba(16, 185, 129, 0.25);
+}
+
+/* Sticky action bar */
+.action-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  backdrop-filter: blur(12px);
+  background: rgba(15, 23, 42, 0.88);
+  border-top: 1px solid var(--line);
+}
+.ab-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0.65rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.ab-hint {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-align: right;
+}
+.ab-kbd {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  color: var(--ink-soft);
+}
+.action-bar .btn,
+.coach .btn,
+.recap .btn {
+  min-height: 2.5rem;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1.1rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.action-bar .btn.primary:hover,
+.recap .btn.primary:hover {
+  background: var(--ok);
+}
+.action-bar .btn.ghost,
+.recap .btn.ghost {
+  background: transparent;
+  color: var(--accent-ink);
+  border: 1px solid var(--accent);
+}
+.action-bar .btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+/* Coach card (guided tour): light card on the dark desk, as in Mergero */
+.coach {
+  position: fixed;
+  left: 1rem;
+  bottom: 5rem;
+  z-index: 55;
+  width: min(25rem, calc(100% - 2rem));
+  background: #f1f5f9;
+  color: #0f172a;
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  animation: rise 0.3s ease both;
+}
+.coach-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.coach-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #047857;
+}
+.coach-x {
+  border: none;
+  background: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: #475569;
+  padding: 0.2rem 0.4rem;
+}
+.coach-progress {
+  display: flex;
+  gap: 3px;
+  margin: 0.5rem 0 0.6rem;
+}
+.coach-progress span {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: #cbd5e1;
+}
+.coach-progress span.on {
+  background: #059669;
+}
+.coach h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.05rem;
+}
+.coach p {
+  margin: 0 0 0.8rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #334155;
+}
+.coach-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.coach .btn.primary {
+  background: #059669;
+  color: #fff;
+}
+.coach .btn.ghost {
+  background: transparent;
+  color: #047857;
+  border: 1px solid #059669;
+}
+/* Recap */
+.recap {
+  margin-top: 1rem;
+  padding: 1.2rem 1.3rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  background: linear-gradient(135deg, var(--accent-bg), var(--card) 60%);
+  animation: rise 0.4s ease both;
+}
+.recap h2 {
+  margin: 0 0 0.8rem;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+}
+.recap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.75rem 1.2rem;
+  margin: 0 0 1rem;
+}
+.recap-grid dt {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+}
+.recap-grid dd {
+  margin: 0.15rem 0 0;
+}
+.recap-grid .big dd:first-of-type {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--accent-ink);
+}
+.recap-grid small {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+.recap .actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+/* Narrow screens */
+@media (max-width: 720px) {
+  .funnel {
+    grid-template-columns: repeat(5, 130px);
+  }
+  .ab-hint,
+  .ab-kbd {
+    display: none;
+  }
+  .ab-inner {
+    justify-content: space-between;
+  }
+  .coach {
+    left: 0.5rem;
+    right: 0.5rem;
+    width: auto;
+    bottom: 4.5rem;
+  }
+  .brand-sub {
+    display: none;
+  }
+}

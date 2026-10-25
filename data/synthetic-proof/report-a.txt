@@ -1,0 +1,8 @@
+Quarterly Operations Summary — Sample Unit A
+Period: Q1
+Metric,Value,Unit
+Manual report hours,42,hours/week
+Systems reconciled,7,count
+Exception tickets,128,count
+On-time KPI pack,0.81,ratio
+Notes: Teams copy figures from three spreadsheets into a weekly pack for leadership.

@@ -1,0 +1,176 @@
+openapi: 3.0.3
+info:
+  title: Aggressive Auditor API
+  version: 0.2.0
+  description: >
+    Stateless generation of a Velho internal Audit Pack from a public company
+    identifier. Public UX/ops leaks only — no security exploit endpoints.
+    No send/contact. No pack persistence. Staging preview is concept HTML only.
+servers:
+  - url: http://localhost:3002
+    description: Local Next.js dev server
+paths:
+  /api/audits:
+    post:
+      operationId: generateAuditPack
+      summary: Generate a session-consumed aggressive audit pack
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateAuditRequest'
+            examples:
+              domain:
+                value:
+                  input: "https://www.kone.com"
+              name:
+                value:
+                  input: "Nokia"
+      responses:
+        '200':
+          description: Audit generated (complete or partial)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditPack'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+        '502':
+          description: Upstream fetch or LLM failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditPack'
+        '500':
+          description: Unexpected server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+components:
+  schemas:
+    GenerateAuditRequest:
+      type: object
+      required: [input]
+      properties:
+        input:
+          type: string
+          minLength: 1
+          maxLength: 500
+    AuditPack:
+      type: object
+      required:
+        - status
+        - signals
+        - leaks
+        - drafts
+        - gaps
+        - generatedAt
+        - warnings
+        - mode
+      properties:
+        status:
+          type: string
+          enum: [complete, partial, error]
+        mode:
+          type: string
+          enum: [aggressive-auditor]
+        company:
+          oneOf:
+            - $ref: '#/components/schemas/TargetCompany'
+            - type: 'null'
+        signals:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicSignal'
+        leaks:
+          type: array
+          maxItems: 5
+          items:
+            $ref: '#/components/schemas/Leak'
+        drafts:
+          type: array
+          items:
+            $ref: '#/components/schemas/OutreachDraft'
+        gaps:
+          type: array
+          items:
+            type: string
+        warnings:
+          type: array
+          items:
+            type: string
+        generatedAt:
+          type: string
+          format: date-time
+    TargetCompany:
+      type: object
+      required: [name, domain, inputRaw, snapshot]
+      properties:
+        name: { type: string }
+        domain: { type: string }
+        inputRaw: { type: string }
+        snapshot: { type: string }
+        industryHint: { type: ['string', 'null'] }
+        sizeHint: { type: ['string', 'null'] }
+    PublicSignal:
+      type: object
+      required: [id, sourceLabel, sourceUrl, excerpt, whyItMatters]
+      properties:
+        id: { type: string }
+        sourceLabel: { type: string }
+        sourceUrl: { type: string }
+        excerpt: { type: string }
+        whyItMatters: { type: string }
+    Leak:
+      type: object
+      required:
+        - id
+        - title
+        - impactScore
+        - effortScore
+        - rank
+        - rationale
+        - tryFirst
+        - confidence
+        - signalIds
+        - conceptualFix
+      properties:
+        id: { type: string }
+        title: { type: string }
+        impactScore: { type: integer, minimum: 1, maximum: 5 }
+        effortScore: { type: integer, minimum: 1, maximum: 5 }
+        rank: { type: integer, minimum: 1 }
+        rationale: { type: string }
+        tryFirst: { type: string }
+        confidence:
+          type: string
+          enum: [high, medium, low]
+        signalIds:
+          type: array
+          items: { type: string }
+        conceptualFix: { type: string }
+        stagingPreviewHtml: { type: ['string', 'null'] }
+    OutreachDraft:
+      type: object
+      required: [channel, addresseeRole, body, draftLabel]
+      properties:
+        channel:
+          type: string
+          enum: [email, linkedin]
+        addresseeRole: { type: string }
+        subject: { type: ['string', 'null'] }
+        body: { type: string }
+        draftLabel: { type: string }
+        relatedLeakIds:
+          type: array
+          items: { type: string }
+    ErrorBody:
+      type: object
+      properties:
+        error: { type: string }

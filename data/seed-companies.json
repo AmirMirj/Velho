@@ -1,0 +1,842 @@
+[
+  {
+    "company": {
+      "id": "kone",
+      "name": "KONE",
+      "domain": "kone.com",
+      "industryHint": "Elevators & escalators",
+      "country": "FI"
+    },
+    "signals": [
+      {
+        "id": "kone-sig-1",
+        "sourceType": "jobs",
+        "sourceLabel": "KONE public jobs",
+        "sourceUrl": "https://www.kone.com/en/careers/",
+        "publishedAt": "2026-01-15",
+        "summary": "Multiple openings mention reporting, data consolidation, and service operations coordination."
+      },
+      {
+        "id": "kone-sig-2",
+        "sourceType": "website",
+        "sourceLabel": "KONE homepage",
+        "sourceUrl": "https://www.kone.com/",
+        "publishedAt": null,
+        "summary": "Public website frames KONE as an established operator with real processes and scale."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "kone-ev-1",
+        "kind": "fact",
+        "text": "Multiple openings mention reporting, data consolidation, and service operations coordination.",
+        "sourceUrl": "https://www.kone.com/en/careers/",
+        "signalIds": [
+          "kone-sig-1"
+        ]
+      },
+      {
+        "id": "kone-ev-2",
+        "kind": "hypothesis",
+        "text": "Growth + ops hiring may increase manual reporting load. This is a hypothesis to investigate, not confirmed internal process truth.",
+        "sourceUrl": null,
+        "signalIds": [
+          "kone-sig-1",
+          "kone-sig-2"
+        ]
+      }
+    ],
+    "opportunity": {
+      "id": "kone-opp-1",
+      "companyId": "kone",
+      "hypothesis": "Growth + ops hiring may increase manual reporting load.",
+      "score": 64,
+      "confidence": "medium",
+      "evidenceStrength": "moderate",
+      "estimatedAnnualValueEur": 8000,
+      "recommendedAction": "investigate",
+      "signalIds": [
+        "kone-sig-1",
+        "kone-sig-2"
+      ],
+      "whyNow": "Public signals suggest operational scale and reporting/coordination themes that may make automation timely.",
+      "scoreBreakdown": {
+        "relevance": 72,
+        "evidenceStrength": 55,
+        "timeliness": 58,
+        "demoFeasibility": 78,
+        "businessValue": 60
+      }
+    }
+  },
+  {
+    "company": {
+      "id": "nokia",
+      "name": "Nokia",
+      "domain": "nokia.com",
+      "industryHint": "Telecom networks",
+      "country": "FI"
+    },
+    "signals": [
+      {
+        "id": "nokia-sig-1",
+        "sourceType": "website",
+        "sourceLabel": "Nokia public website",
+        "sourceUrl": "https://www.nokia.com/",
+        "publishedAt": "2026-01-15",
+        "summary": "Public materials emphasize complex delivery, services, and operational scale across markets."
+      },
+      {
+        "id": "nokia-sig-2",
+        "sourceType": "website",
+        "sourceLabel": "Nokia homepage",
+        "sourceUrl": "https://www.nokia.com/",
+        "publishedAt": null,
+        "summary": "Public website frames Nokia as an established operator with real processes and scale."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "nokia-ev-1",
+        "kind": "fact",
+        "text": "Public materials emphasize complex delivery, services, and operational scale across markets.",
+        "sourceUrl": "https://www.nokia.com/",
+        "signalIds": [
+          "nokia-sig-1"
+        ]
+      },
+      {
+        "id": "nokia-ev-2",
+        "kind": "hypothesis",
+        "text": "Scale of delivery ops may create consolidation bottlenecks. This is a hypothesis to investigate, not confirmed internal process truth.",
+        "sourceUrl": null,
+        "signalIds": [
+          "nokia-sig-1",
+          "nokia-sig-2"
+        ]
+      }
+    ],
+    "opportunity": {
+      "id": "nokia-opp-1",
+      "companyId": "nokia",
+      "hypothesis": "Scale of delivery ops may create consolidation bottlenecks.",
+      "score": 64,
+      "confidence": "medium",
+      "evidenceStrength": "moderate",
+      "estimatedAnnualValueEur": 8000,
+      "recommendedAction": "investigate",
+      "signalIds": [
+        "nokia-sig-1",
+        "nokia-sig-2"
+      ],
+      "whyNow": "Public signals suggest operational scale and reporting/coordination themes that may make automation timely.",
+      "scoreBreakdown": {
+        "relevance": 72,
+        "evidenceStrength": 55,
+        "timeliness": 58,
+        "demoFeasibility": 78,
+        "businessValue": 60
+      }
+    }
+  },
+  {
+    "company": {
+      "id": "neste",
+      "name": "Neste",
+      "domain": "neste.com",
+      "industryHint": "Renewable fuels",
+      "country": "FI"
+    },
+    "signals": [
+      {
+        "id": "neste-sig-1",
+        "sourceType": "website",
+        "sourceLabel": "Neste public website",
+        "sourceUrl": "https://www.neste.com/",
+        "publishedAt": "2026-01-15",
+        "summary": "Published sustainability and operations reporting appears highly structured and recurring."
+      },
+      {
+        "id": "neste-sig-2",
+        "sourceType": "website",
+        "sourceLabel": "Neste homepage",
+        "sourceUrl": "https://www.neste.com/",
+        "publishedAt": null,
+        "summary": "Public website frames Neste as an established operator with real processes and scale."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "neste-ev-1",
+        "kind": "fact",
+        "text": "Published sustainability and operations reporting appears highly structured and recurring.",
+        "sourceUrl": "https://www.neste.com/",
+        "signalIds": [
+          "neste-sig-1"
+        ]
+      },
+      {
+        "id": "neste-ev-2",
+        "kind": "hypothesis",
+        "text": "Recurring structured reports suggest manual pack assembly risk. This is a hypothesis to investigate, not confirmed internal process truth.",
+        "sourceUrl": null,
+        "signalIds": [
+          "neste-sig-1",
+          "neste-sig-2"
+        ]
+      }
+    ],
+    "opportunity": {
+      "id": "neste-opp-1",
+      "companyId": "neste",
+      "hypothesis": "Recurring structured reports suggest manual pack assembly risk.",
+      "score": 71,
+      "confidence": "high",
+      "evidenceStrength": "strong",
+      "estimatedAnnualValueEur": 12480,
+      "recommendedAction": "pursue",
+      "signalIds": [
+        "neste-sig-1",
+        "neste-sig-2"
+      ],
+      "whyNow": "Public signals suggest operational scale and reporting/coordination themes that may make automation timely.",
+      "scoreBreakdown": {
+        "relevance": 72,
+        "evidenceStrength": 78,
+        "timeliness": 58,
+        "demoFeasibility": 78,
+        "businessValue": 60
+      }
+    }
+  },
+  {
+    "company": {
+      "id": "upm",
+      "name": "UPM",
+      "domain": "upm.com",
+      "industryHint": "Forest industry",
+      "country": "FI"
+    },
+    "signals": [
+      {
+        "id": "upm-sig-1",
+        "sourceType": "procurement",
+        "sourceLabel": "UPM public procurement",
+        "sourceUrl": "https://www.upm.com/",
+        "publishedAt": "2026-01-15",
+        "summary": "Public procurement-style supplier and documentation language appears repeatedly in published materials."
+      },
+      {
+        "id": "upm-sig-2",
+        "sourceType": "website",
+        "sourceLabel": "UPM homepage",
+        "sourceUrl": "https://www.upm.com/",
+        "publishedAt": null,
+        "summary": "Public website frames UPM as an established operator with real processes and scale."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "upm-ev-1",
+        "kind": "fact",
+        "text": "Public procurement-style supplier and documentation language appears repeatedly in published materials.",
+        "sourceUrl": "https://www.upm.com/",
+        "signalIds": [
+          "upm-sig-1"
+        ]
+      },
+      {
+        "id": "upm-ev-2",
+        "kind": "hypothesis",
+        "text": "Repetitive document preparation for suppliers/partners. This is a hypothesis to investigate, not confirmed internal process truth.",
+        "sourceUrl": null,
+        "signalIds": [
+          "upm-sig-1",
+          "upm-sig-2"
+        ]
+      }
+    ],
+    "opportunity": {
+      "id": "upm-opp-1",
+      "companyId": "upm",
+      "hypothesis": "Repetitive document preparation for suppliers/partners.",
+      "score": 64,
+      "confidence": "medium",
+      "evidenceStrength": "moderate",
+      "estimatedAnnualValueEur": 8000,
+      "recommendedAction": "investigate",
+      "signalIds": [
+        "upm-sig-1",
+        "upm-sig-2"
+      ],
+      "whyNow": "Public signals suggest operational scale and reporting/coordination themes that may make automation timely.",
+      "scoreBreakdown": {
+        "relevance": 72,
+        "evidenceStrength": 55,
+        "timeliness": 58,
+        "demoFeasibility": 78,
+        "businessValue": 60
+      }
+    }
+  },
+  {
+    "company": {
+      "id": "storaenso",
+      "name": "Stora Enso",
+      "domain": "storaenso.com",
+      "industryHint": "Packaging & biomaterials",
+      "country": "FI"
+    },
+    "signals": [
+      {
+        "id": "storaenso-sig-1",
+        "sourceType": "jobs",
+        "sourceLabel": "Stora Enso public jobs",
+        "sourceUrl": "https://www.storaenso.com/",
+        "publishedAt": "2026-01-15",
+        "summary": "Careers copy references process improvement, reporting, and mill operations coordination."
+      },
+      {
+        "id": "storaenso-sig-2",
+        "sourceType": "website",
+        "sourceLabel": "Stora Enso homepage",
+        "sourceUrl": "https://www.storaenso.com/",
+        "publishedAt": null,
+        "summary": "Public website frames Stora Enso as an established operator with real processes and scale."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "storaenso-ev-1",
+        "kind": "fact",
+        "text": "Careers copy references process improvement, reporting, and mill operations coordination.",
+        "sourceUrl": "https://www.storaenso.com/",
+        "signalIds": [
+          "storaenso-sig-1"
+        ]
+      },
+      {
+        "id": "storaenso-ev-2",
+        "kind": "hypothesis",
+        "text": "Mill ops reporting may be partly manual. This is a hypothesis to investigate, not confirmed internal process truth.",
+        "sourceUrl": null,
+        "signalIds": [
+          "storaenso-sig-1",
+          "storaenso-sig-2"
+        ]
+      }
+    ],
+    "opportunity": {
+      "id": "storaenso-opp-1",
+      "companyId": "storaenso",
+      "hypothesis": "Mill ops reporting may be partly manual.",
+      "score": 64,
+      "confidence": "medium",
+      "evidenceStrength": "moderate",
+      "estimatedAnnualValueEur": 8000,
+      "recommendedAction": "investigate",
+      "signalIds": [
+        "storaenso-sig-1",
+        "storaenso-sig-2"
+      ],
+      "whyNow": "Public signals suggest operational scale and reporting/coordination themes that may make automation timely.",
+      "scoreBreakdown": {
+        "relevance": 72,
+        "evidenceStrength": 55,
+        "timeliness": 58,
+        "demoFeasibility": 78,
+        "businessValue": 60
+      }
+    }
+  },
+  {
+    "company": {
+      "id": "wartsila",
+      "name": "W\u00e4rtsil\u00e4",
+      "domain": "wartsila.com",
+      "industryHint": "Energy & marine",
+      "country": "FI"
+    },
+    "signals": [
+      {
+        "id": "wartsila-sig-1",
+        "sourceType": "website",
+        "sourceLabel": "W\u00e4rtsil\u00e4 public website",
+        "sourceUrl": "https://www.wartsila.com/",
+        "publishedAt": "2026-01-15",
+        "summary": "Service and lifecycle offerings describe multi-system operational data."
+      },
+      {
+        "id": "wartsila-sig-2",
+        "sourceType": "website",
+        "sourceLabel": "W\u00e4rtsil\u00e4 homepage",
+        "sourceUrl": "https://www.wartsila.com/",
+        "publishedAt": null,
+        "summary": "Public website frames W\u00e4rtsil\u00e4 as an established operator with real processes and scale."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "wartsila-ev-1",
+        "kind": "fact",
+        "text": "Service and lifecycle offerings describe multi-system operational data.",
+        "sourceUrl": "https://www.wartsila.com/",
+        "signalIds": [
+          "wartsila-sig-1"
+        ]
+      },
+      {
+        "id": "wartsila-ev-2",
+        "kind": "hypothesis",
+        "text": "Lifecycle service data may need consolidation automation. This is a hypothesis to investigate, not confirmed internal process truth.",
+        "sourceUrl": null,
+        "signalIds": [
+          "wartsila-sig-1",
+          "wartsila-sig-2"
+        ]
+      }
+    ],
+    "opportunity": {
+      "id": "wartsila-opp-1",
+      "companyId": "wartsila",
+      "hypothesis": "Lifecycle service data may need consolidation automation.",
+      "score": 71,
+      "confidence": "high",
+      "evidenceStrength": "strong",
+      "estimatedAnnualValueEur": 12480,
+      "recommendedAction": "pursue",
+      "signalIds": [
+        "wartsila-sig-1",
+        "wartsila-sig-2"
+      ],
+      "whyNow": "Public signals suggest operational scale and reporting/coordination themes that may make automation timely.",
+      "scoreBreakdown": {
+        "relevance": 72,
+        "evidenceStrength": 78,
+        "timeliness": 58,
+        "demoFeasibility": 78,
+        "businessValue": 60
+      }
+    }
+  },
+  {
+    "company": {
+      "id": "kemira",
+      "name": "Kemira",
+      "domain": "kemira.com",
+      "industryHint": "Chemicals",
+      "country": "FI"
+    },
+    "signals": [
+      {
+        "id": "kemira-sig-1",
+        "sourceType": "jobs",
+        "sourceLabel": "Kemira public jobs",
+        "sourceUrl": "https://www.kemira.com/",
+        "publishedAt": "2026-01-15",
+        "summary": "Open roles reference supply chain visibility and operational reporting."
+      },
+      {
+        "id": "kemira-sig-2",
+        "sourceType": "website",
+        "sourceLabel": "Kemira homepage",
+        "sourceUrl": "https://www.kemira.com/",
+        "publishedAt": null,
+        "summary": "Public website frames Kemira as an established operator with real processes and scale."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "kemira-ev-1",
+        "kind": "fact",
+        "text": "Open roles reference supply chain visibility and operational reporting.",
+        "sourceUrl": "https://www.kemira.com/",
+        "signalIds": [
+          "kemira-sig-1"
+        ]
+      },
+      {
+        "id": "kemira-ev-2",
+        "kind": "hypothesis",
+        "text": "Supply-chain reporting workload hypothesis. This is a hypothesis to investigate, not confirmed internal process truth.",
+        "sourceUrl": null,
+        "signalIds": [
+          "kemira-sig-1",
+          "kemira-sig-2"
+        ]
+      }
+    ],
+    "opportunity": {
+      "id": "kemira-opp-1",
+      "companyId": "kemira",
+      "hypothesis": "Supply-chain reporting workload hypothesis.",
+      "score": 64,
+      "confidence": "medium",
+      "evidenceStrength": "moderate",
+      "estimatedAnnualValueEur": 8000,
+      "recommendedAction": "investigate",
+      "signalIds": [
+        "kemira-sig-1",
+        "kemira-sig-2"
+      ],
+      "whyNow": "Public signals suggest operational scale and reporting/coordination themes that may make automation timely.",
+      "scoreBreakdown": {
+        "relevance": 72,
+        "evidenceStrength": 55,
+        "timeliness": 58,
+        "demoFeasibility": 78,
+        "businessValue": 60
+      }
+    }
+  },
+  {
+    "company": {
+      "id": "outokumpu",
+      "name": "Outokumpu",
+      "domain": "outokumpu.com",
+      "industryHint": "Stainless steel",
+      "country": "FI"
+    },
+    "signals": [
+      {
+        "id": "outokumpu-sig-1",
+        "sourceType": "website",
+        "sourceLabel": "Outokumpu public website",
+        "sourceUrl": "https://www.outokumpu.com/",
+        "publishedAt": "2026-01-15",
+        "summary": "Public site highlights production excellence and continuous improvement programs."
+      },
+      {
+        "id": "outokumpu-sig-2",
+        "sourceType": "website",
+        "sourceLabel": "Outokumpu homepage",
+        "sourceUrl": "https://www.outokumpu.com/",
+        "publishedAt": null,
+        "summary": "Public website frames Outokumpu as an established operator with real processes and scale."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "outokumpu-ev-1",
+        "kind": "fact",
+        "text": "Public site highlights production excellence and continuous improvement programs.",
+        "sourceUrl": "https://www.outokumpu.com/",
+        "signalIds": [
+          "outokumpu-sig-1"
+        ]
+      },
+      {
+        "id": "outokumpu-ev-2",
+        "kind": "hypothesis",
+        "text": "Production KPI packs may be assembled manually. This is a hypothesis to investigate, not confirmed internal process truth.",
+        "sourceUrl": null,
+        "signalIds": [
+          "outokumpu-sig-1",
+          "outokumpu-sig-2"
+        ]
+      }
+    ],
+    "opportunity": {
+      "id": "outokumpu-opp-1",
+      "companyId": "outokumpu",
+      "hypothesis": "Production KPI packs may be assembled manually.",
+      "score": 64,
+      "confidence": "medium",
+      "evidenceStrength": "moderate",
+      "estimatedAnnualValueEur": 8000,
+      "recommendedAction": "investigate",
+      "signalIds": [
+        "outokumpu-sig-1",
+        "outokumpu-sig-2"
+      ],
+      "whyNow": "Public signals suggest operational scale and reporting/coordination themes that may make automation timely.",
+      "scoreBreakdown": {
+        "relevance": 72,
+        "evidenceStrength": 55,
+        "timeliness": 58,
+        "demoFeasibility": 78,
+        "businessValue": 60
+      }
+    }
+  },
+  {
+    "company": {
+      "id": "metso",
+      "name": "Metso",
+      "domain": "metso.com",
+      "industryHint": "Mining equipment",
+      "country": "FI"
+    },
+    "signals": [
+      {
+        "id": "metso-sig-1",
+        "sourceType": "website",
+        "sourceLabel": "Metso public website",
+        "sourceUrl": "https://www.metso.com/",
+        "publishedAt": "2026-01-15",
+        "summary": "Customer service and installed-base operations feature prominently."
+      },
+      {
+        "id": "metso-sig-2",
+        "sourceType": "website",
+        "sourceLabel": "Metso homepage",
+        "sourceUrl": "https://www.metso.com/",
+        "publishedAt": null,
+        "summary": "Public website frames Metso as an established operator with real processes and scale."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "metso-ev-1",
+        "kind": "fact",
+        "text": "Customer service and installed-base operations feature prominently.",
+        "sourceUrl": "https://www.metso.com/",
+        "signalIds": [
+          "metso-sig-1"
+        ]
+      },
+      {
+        "id": "metso-ev-2",
+        "kind": "hypothesis",
+        "text": "Installed-base reporting consolidation opportunity. This is a hypothesis to investigate, not confirmed internal process truth.",
+        "sourceUrl": null,
+        "signalIds": [
+          "metso-sig-1",
+          "metso-sig-2"
+        ]
+      }
+    ],
+    "opportunity": {
+      "id": "metso-opp-1",
+      "companyId": "metso",
+      "hypothesis": "Installed-base reporting consolidation opportunity.",
+      "score": 71,
+      "confidence": "high",
+      "evidenceStrength": "strong",
+      "estimatedAnnualValueEur": 12480,
+      "recommendedAction": "pursue",
+      "signalIds": [
+        "metso-sig-1",
+        "metso-sig-2"
+      ],
+      "whyNow": "Public signals suggest operational scale and reporting/coordination themes that may make automation timely.",
+      "scoreBreakdown": {
+        "relevance": 72,
+        "evidenceStrength": 78,
+        "timeliness": 58,
+        "demoFeasibility": 78,
+        "businessValue": 60
+      }
+    }
+  },
+  {
+    "company": {
+      "id": "cargotec",
+      "name": "Cargotec",
+      "domain": "cargotec.com",
+      "industryHint": "Cargo handling",
+      "country": "FI"
+    },
+    "signals": [
+      {
+        "id": "cargotec-sig-1",
+        "sourceType": "jobs",
+        "sourceLabel": "Cargotec public jobs",
+        "sourceUrl": "https://www.cargotec.com/",
+        "publishedAt": "2026-01-15",
+        "summary": "Hiring language includes operations excellence and performance reporting themes."
+      },
+      {
+        "id": "cargotec-sig-2",
+        "sourceType": "website",
+        "sourceLabel": "Cargotec homepage",
+        "sourceUrl": "https://www.cargotec.com/",
+        "publishedAt": null,
+        "summary": "Public website frames Cargotec as an established operator with real processes and scale."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "cargotec-ev-1",
+        "kind": "fact",
+        "text": "Hiring language includes operations excellence and performance reporting themes.",
+        "sourceUrl": "https://www.cargotec.com/",
+        "signalIds": [
+          "cargotec-sig-1"
+        ]
+      },
+      {
+        "id": "cargotec-ev-2",
+        "kind": "hypothesis",
+        "text": "Performance reporting may consume analyst time. This is a hypothesis to investigate, not confirmed internal process truth.",
+        "sourceUrl": null,
+        "signalIds": [
+          "cargotec-sig-1",
+          "cargotec-sig-2"
+        ]
+      }
+    ],
+    "opportunity": {
+      "id": "cargotec-opp-1",
+      "companyId": "cargotec",
+      "hypothesis": "Performance reporting may consume analyst time.",
+      "score": 64,
+      "confidence": "medium",
+      "evidenceStrength": "moderate",
+      "estimatedAnnualValueEur": 8000,
+      "recommendedAction": "investigate",
+      "signalIds": [
+        "cargotec-sig-1",
+        "cargotec-sig-2"
+      ],
+      "whyNow": "Public signals suggest operational scale and reporting/coordination themes that may make automation timely.",
+      "scoreBreakdown": {
+        "relevance": 72,
+        "evidenceStrength": 55,
+        "timeliness": 58,
+        "demoFeasibility": 78,
+        "businessValue": 60
+      }
+    }
+  },
+  {
+    "company": {
+      "id": "valmet",
+      "name": "Valmet",
+      "domain": "valmet.com",
+      "industryHint": "Process technology",
+      "country": "FI"
+    },
+    "signals": [
+      {
+        "id": "valmet-sig-1",
+        "sourceType": "website",
+        "sourceLabel": "Valmet public website",
+        "sourceUrl": "https://www.valmet.com/",
+        "publishedAt": "2026-01-15",
+        "summary": "Services and process performance narratives recur across public pages."
+      },
+      {
+        "id": "valmet-sig-2",
+        "sourceType": "website",
+        "sourceLabel": "Valmet homepage",
+        "sourceUrl": "https://www.valmet.com/",
+        "publishedAt": null,
+        "summary": "Public website frames Valmet as an established operator with real processes and scale."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "valmet-ev-1",
+        "kind": "fact",
+        "text": "Services and process performance narratives recur across public pages.",
+        "sourceUrl": "https://www.valmet.com/",
+        "signalIds": [
+          "valmet-sig-1"
+        ]
+      },
+      {
+        "id": "valmet-ev-2",
+        "kind": "hypothesis",
+        "text": "Process performance packs may be semi-manual. This is a hypothesis to investigate, not confirmed internal process truth.",
+        "sourceUrl": null,
+        "signalIds": [
+          "valmet-sig-1",
+          "valmet-sig-2"
+        ]
+      }
+    ],
+    "opportunity": {
+      "id": "valmet-opp-1",
+      "companyId": "valmet",
+      "hypothesis": "Process performance packs may be semi-manual.",
+      "score": 64,
+      "confidence": "medium",
+      "evidenceStrength": "moderate",
+      "estimatedAnnualValueEur": 8000,
+      "recommendedAction": "investigate",
+      "signalIds": [
+        "valmet-sig-1",
+        "valmet-sig-2"
+      ],
+      "whyNow": "Public signals suggest operational scale and reporting/coordination themes that may make automation timely.",
+      "scoreBreakdown": {
+        "relevance": 72,
+        "evidenceStrength": 55,
+        "timeliness": 58,
+        "demoFeasibility": 78,
+        "businessValue": 60
+      }
+    }
+  },
+  {
+    "company": {
+      "id": "fiskars",
+      "name": "Fiskars Group",
+      "domain": "fiskarsgroup.com",
+      "industryHint": "Consumer goods",
+      "country": "FI"
+    },
+    "signals": [
+      {
+        "id": "fiskars-sig-1",
+        "sourceType": "website",
+        "sourceLabel": "Fiskars Group public website",
+        "sourceUrl": "https://www.fiskarsgroup.com/",
+        "publishedAt": "2026-01-15",
+        "summary": "Multi-brand operations and commercial reporting described publicly."
+      },
+      {
+        "id": "fiskars-sig-2",
+        "sourceType": "website",
+        "sourceLabel": "Fiskars Group homepage",
+        "sourceUrl": "https://www.fiskarsgroup.com/",
+        "publishedAt": null,
+        "summary": "Public website frames Fiskars Group as an established operator with real processes and scale."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "fiskars-ev-1",
+        "kind": "fact",
+        "text": "Multi-brand operations and commercial reporting described publicly.",
+        "sourceUrl": "https://www.fiskarsgroup.com/",
+        "signalIds": [
+          "fiskars-sig-1"
+        ]
+      },
+      {
+        "id": "fiskars-ev-2",
+        "kind": "hypothesis",
+        "text": "Multi-brand reporting consolidation hypothesis. This is a hypothesis to investigate, not confirmed internal process truth.",
+        "sourceUrl": null,
+        "signalIds": [
+          "fiskars-sig-1",
+          "fiskars-sig-2"
+        ]
+      }
+    ],
+    "opportunity": {
+      "id": "fiskars-opp-1",
+      "companyId": "fiskars",
+      "hypothesis": "Multi-brand reporting consolidation hypothesis.",
+      "score": 71,
+      "confidence": "high",
+      "evidenceStrength": "strong",
+      "estimatedAnnualValueEur": 12480,
+      "recommendedAction": "pursue",
+      "signalIds": [
+        "fiskars-sig-1",
+        "fiskars-sig-2"
+      ],
+      "whyNow": "Public signals suggest operational scale and reporting/coordination themes that may make automation timely.",
+      "scoreBreakdown": {
+        "relevance": 72,
+        "evidenceStrength": 78,
+        "timeliness": 58,
+        "demoFeasibility": 78,
+        "businessValue": 60
+      }
+    }
+  }
+]
